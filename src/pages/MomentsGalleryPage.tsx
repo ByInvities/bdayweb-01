@@ -13,12 +13,12 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
   const { playClick } = useAudio();
   const [selectedMoment, setSelectedMoment] = useState<PhotoMoment | null>(null);
 
-  // Total 6 images
+  // Total 6 images - ✅ FIXED: Removed 'public/' from all paths
   const moments: PhotoMoment[] = [
     {
       id: '1',
       title: 'Queen Yamu 👑',
-      image: 'public/images/1.jpeg',
+      image: '/images/1.jpeg',
       date: 'Sibling Love',
       caption: '',
       sticker: '👑',
@@ -27,7 +27,7 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
     {
       id: '2',
       title: 'Cutie',
-      image: 'public/images/2.jpeg',
+      image: '/images/2.jpeg',
       date: 'blue hour',
       caption: '',
       sticker: '🩷',
@@ -36,7 +36,7 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
     {
       id: '3',
       title: 'Didi 🌾',
-      image: 'public/images/3.jpeg',
+      image: '/images/3.jpeg',
       date: 'Golden Hour',
       caption: '',
       sticker: '🌻',
@@ -45,7 +45,7 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
     {
       id: '4',
       title: 'Gori Chori 💗',
-      image: 'public/images/4.jpeg',
+      image: '/images/4.jpeg',
       date: 'Beauty',
       caption: '',
       sticker: '🧺',
@@ -54,7 +54,7 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
     {
       id: '5',
       title: 'Duo ✨',
-      image: 'public/images/5.jpg',
+      image: '/images/5.jpg',
       date: 'Bhai-Didi',
       caption: '',
       sticker: '⭐',
@@ -63,7 +63,7 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
     {
       id: '9',
       title: 'Patidar 🌸',
-      image: 'public/images/9.jpeg',
+      image: '/images/9.jpeg',
       date: 'Chaotic chee',
       caption: '',
       sticker: '🌸', 
@@ -146,13 +146,17 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
                   src={moment.image}
                   alt={moment.title}
                   className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out"
+                  onError={(e) => {
+                    // Fallback if image doesn't load
+                    (e.target as HTMLImageElement).src = `https://via.placeholder.com/300x300/3d2b1f/ffffff?text=${moment.title}`;
+                  }}
                 />
                 <div className="absolute top-2 right-2 bg-[#fbf7ee] px-2 py-0.5 rounded-full border border-[#3d2b1f] text-xs font-pixel shadow-xs">
                   {moment.sticker}
                 </div>
               </div>
 
-              {/* Title & Date Only (Captions Removed as requested) */}
+              {/* Title & Date Only */}
               <div className="flex items-center justify-between font-handwriting text-2xl font-bold text-[#3d2b1f]">
                 <span>{moment.title}</span>
                 <span className="text-xs font-pixel text-[#7a5232]">{moment.date}</span>
@@ -194,6 +198,9 @@ export const MomentsGalleryPage: React.FC<MomentsGalleryPageProps> = ({ onBackTo
                     src={selectedMoment.image}
                     alt={selectedMoment.title}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = `https://via.placeholder.com/400x300/3d2b1f/ffffff?text=${selectedMoment.title}`;
+                    }}
                   />
                 </div>
 
