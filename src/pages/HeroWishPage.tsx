@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { TwineBow, PixelHeart, PixelFlower, PixelStar, PixelMushroom } from '../components/PixelProps';
 import { useAudio } from '../context/AudioContext';
 
+// Option: Import image if in src/assets
+// import image8 from '../assets/images/8.jpeg';
+
 interface HeroWishPageProps {
   onContinue: () => void;
 }
@@ -74,12 +77,14 @@ export const HeroWishPage: React.FC<HeroWishPageProps> = ({ onContinue }) => {
 
               {/* Inner Photo Border with Glow */}
               <div className="overflow-hidden rounded-2xl border-3 border-[#3d2b1f] bg-[#e2af70]/20 aspect-3/4 max-h-[280px] sm:max-h-[310px] flex items-center justify-center relative shadow-inner">
+                {/* ✅ FIXED: Removed 'public/' from path */}
                 <img
-                  src="public/images/8.jpeg"
+                  src="/images/8.jpeg"
                   alt="Yamu Didi"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = ''; // Fallback image if the original fails to load;
+                    // Fallback if image doesn't load
+                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/300x400/3d2b1f/ffffff?text=Yamu+Didi';
                   }}
                 />
                 
