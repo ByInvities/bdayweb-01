@@ -26,11 +26,11 @@ export const FinalPage: React.FC<FinalPageProps> = ({ onNavigate }) => {
       {/* FULL SCREEN BACKGROUND IMAGE */}
       <div className="absolute inset-0 w-full h-full z-0">
         <img
-          src="public/images/8.jpeg"
+          src="/images/8.jpeg"
           alt="Yamu Didi"
           className="w-full h-full object-cover object-center"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = '/images/paridhi_photo.webp';
+            (e.target as HTMLImageElement).src = '/images/8.jpeg';
           }}
         />
 
